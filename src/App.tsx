@@ -104,12 +104,19 @@ const useAuth = () => {
 // --- Mock Data ---
 
 const PRODUCTS: Product[] = [
-  { id: 1, name: "AURIX Chrono", model: "AX-C120 - 42 MM", price: 249, img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&q=80&w=1000", badge: "50% OFF", category: "Chronograph", description: "A masterpiece of timing and style, featuring a robust stainless steel case." },
-  { id: 2, name: "NOVA Classic", model: "NV-A98 - 42 MM", price: 199, img: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&q=80&w=1000", badge: "New Arrival", category: "Classic", description: "Timeless design meets modern reliability in this elegant everyday timepiece." },
-  { id: 3, name: "STEEL PRO", model: "SP-X55 - 44 MM", price: 299, img: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&q=80&w=1000", badge: "Best Seller", category: "Professional", description: "Built for the extremes, the Steel Pro offers unmatched durability and precision." },
-  { id: 4, name: "OCEANIC Diver", model: "OD-77 - 45 MM", price: 349, img: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&q=80&w=1000", category: "Diver", description: "Water-resistant up to 200m, perfect for the modern explorer of the deep." },
-  { id: 5, name: "LUNAR Phase", model: "LP-22 - 40 MM", price: 450, img: "https://images.unsplash.com/photo-1508685096489-7aac29625a3b?auto=format&fit=crop&q=80&w=1000", badge: "Limited", category: "Luxury", description: "Track the celestial movements with our most sophisticated lunar phase complication." },
-  { id: 6, name: "ZENITH Gold", model: "ZG-01 - 38 MM", price: 899, img: "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?auto=format&fit=crop&q=80&w=1000", category: "Luxury", description: "Pure 18k gold plating meets Swiss automatic movement for ultimate prestige." },
+  { id: 1, name: "AURIX Chrono", model: "AX-C120 - 42 MM", price: 249, img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=800", badge: "50% OFF", category: "Chronograph", description: "A masterpiece of timing and style, featuring a robust stainless steel case and precision analog movement." },
+  { id: 2, name: "NOVA Classic", model: "NV-A98 - 42 MM", price: 210, img: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800", badge: "New Arrival", category: "Classic", description: "Timeless design meets modern reliability in this elegant everyday analog timepiece." },
+  { id: 3, name: "STEEL PRO", model: "SP-X55 - 44 MM", price: 299, img: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?w=800", badge: "Best Seller", category: "Professional", description: "Built for the extremes, the Steel Pro offers unmatched durability and mechanical precision." },
+  { id: 4, name: "OCEANIC Diver", model: "OD-77 - 45 MM", price: 349, img: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800", category: "Diver", description: "Water-resistant up to 200m, an essential analog tool for the modern explorer of the deep." },
+  { id: 6, name: "ZENITH Gold", model: "ZG-01 - 38 MM", price: 899, img: "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?w=800", category: "Luxury", description: "Pure 18k gold plating meets Swiss automatic movement for ultimate prestige." },
+  { id: 8, name: "ROSE Elegance", model: "RE-05 - 38 MM", price: 550, img: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=800", badge: "New Arrival", category: "Luxury", description: "Rose gold casing paired with a genuine leather strap for timeless analog sophistication." },
+  { id: 9, name: "AVIATOR Blue", model: "AB-22 - 42 MM", price: 280, img: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=800", category: "Chronograph", description: "Inspired by aviation history, featuring a deep blue analog dial and luminous markers." },
+  { id: 14, name: "VEGA Tourbillon", model: "VT-01 - 40 MM", price: 1250, img: "https://images.unsplash.com/photo-1585123334904-845d60e97b29?w=800", category: "Luxury", description: "A technical marvel featuring a visible tourbillon cage for gravity-defying mechanical precision." },
+  { id: 15, name: "ORION Silver", model: "OS-22 - 39 MM", price: 215, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800", category: "Classic", description: "A minimalist silver analog dial that reflects the stars, perfect for evening wear." },
+  { id: 19, name: "CARBON X", model: "CX-01 - 44 MM", price: 310, img: "https://images.unsplash.com/photo-1539874754764-5a96559165b0?w=800", category: "Professional", description: "Ultra-lightweight carbon fiber case with a high-performance rubber strap and analog display." },
+  { id: 24, name: "MARBLE Luxe", model: "ML-09 - 38 MM", price: 420, img: "https://images.unsplash.com/photo-1548169874-53e85f753f1e?w=800", category: "Luxury", description: "Featuring a genuine Italian marble analog dial, each piece is truly unique." },
+  { id: 25, name: "AURA Automatic", model: "AA-12 - 36 MM", price: 205, img: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=800", category: "Classic", description: "High-precision automatic movement in a slim, elegant analog profile." },
+  { id: 26, name: "POLAR Explorer", model: "PE-01 - 42 MM", price: 315, img: "https://images.unsplash.com/photo-1619134778706-7015533a6150?w=800", category: "Professional", description: "A stark white analog dial for maximum visibility in snowy or bright conditions." },
 ];
 
 // --- Components ---
@@ -411,7 +418,7 @@ const CartSidebar = () => {
                 cart.map((item) => (
                   <div key={item.id} className="flex gap-4">
                     <div className="w-24 h-24 bg-gray-50 rounded-2xl flex-shrink-0 p-2">
-                      <img src={item.img} alt={item.name} className="w-full h-full object-contain mix-blend-multiply" referrerPolicy="no-referrer" />
+                      <img src={item.img} alt={item.name} className="w-full h-full object-cover rounded-xl" referrerPolicy="no-referrer" />
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between mb-1">
@@ -493,12 +500,6 @@ const HomePage = () => {
                 Explore Collection
                 <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
               </Link>
-              <button className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-gray-50 transition-all">
-                  <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-bottle-green border-b-[6px] border-b-transparent ml-1"></div>
-                </div>
-                <span className="text-bottle-green font-bold uppercase tracking-widest text-[10px]">Watch Film</span>
-              </button>
             </div>
             
             <div className="mt-12 flex items-center gap-8">
@@ -530,7 +531,7 @@ const HomePage = () => {
                 muted 
                 loop 
                 playsInline
-                poster="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                poster="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=1600"
                 className="absolute inset-0 w-full h-full object-cover z-0"
               >
                 <source src="https://videos.pexels.com/video-files/4440954/4440954-sd_640_360_24fps.mp4" type="video/mp4" />
@@ -619,36 +620,38 @@ const HomePage = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-10">
-            {PRODUCTS.slice(0, 3).map((p, i) => (
+            {PRODUCTS.filter(p => p.badge === "New Arrival").slice(0, 3).map((p, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="group"
+                className="group flex flex-col h-full"
               >
-                <div className="relative bg-white rounded-3xl aspect-[4/5] mb-6 overflow-hidden flex items-center justify-center p-12 transition-all duration-500 group-hover:bg-gray-50">
+                <div className="relative bg-white rounded-3xl aspect-[4/5] mb-6 overflow-hidden transition-all duration-500 group-hover:bg-gray-50 flex-shrink-0">
                   {p.badge && (
-                    <span className="absolute top-6 left-6 bg-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-bottle-green premium-shadow border border-gray-100">
+                    <span className="absolute top-6 left-6 bg-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-bottle-green premium-shadow border border-gray-100 z-10">
                       {p.badge}
                     </span>
                   )}
-                  <Link to={`/product/${p.id}`} className="w-full h-full">
-                    <img src={p.img} alt={p.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
+                  <Link to={`/product/${p.id}`} className="w-full h-full block">
+                    <img src={p.img} alt={p.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
                   </Link>
                   <button 
                     onClick={() => addToCart(p)}
-                    className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-bottle-green text-white px-8 py-3 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 premium-shadow"
+                    className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-bottle-green text-white px-8 py-3 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 premium-shadow z-10"
                   >
                     Add to Cart
                   </button>
                 </div>
-                <div className="text-center">
-                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1">{p.name}</p>
-                  <Link to={`/product/${p.id}`}>
-                    <h3 className="text-xl font-bold text-bottle-green mb-2 hover:text-premium-gold transition-colors">{p.model}</h3>
+                <div className="text-center flex flex-col flex-grow">
+                  <p className="text-gray-400 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">{p.name}</p>
+                  <Link to={`/product/${p.id}`} className="mb-2 block">
+                    <h3 className="text-lg font-bold text-bottle-green hover:text-premium-gold transition-colors leading-tight px-4">{p.model}</h3>
                   </Link>
-                  <p className="text-premium-gold font-serif text-2xl">${p.price}</p>
+                  <div className="mt-auto">
+                    <p className="text-premium-gold font-serif text-xl">${p.price}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -657,26 +660,48 @@ const HomePage = () => {
       </section>
 
       {/* Modern Section */}
-      <section className="bg-bottle-green text-white overflow-hidden relative">
+      <section className="bg-bottle-green text-white overflow-hidden relative py-32">
         <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#fff,transparent)] scale-150"></div>
         </div>
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-          <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">Modern Watches For <br /> Every Occasion</h2>
-            <p className="text-white/70 text-lg mb-12 max-w-md leading-relaxed">A perfect balance of style and performance for every moment. Whether it's a formal gala or a casual weekend, VORREX is your perfect companion.</p>
-            <div className="flex flex-col gap-8">
-              <Link to="/shop" className="bg-premium-gold text-bottle-green px-10 py-4 rounded-full font-bold hover:bg-premium-gold-light transition-all w-fit premium-shadow">Explore Our Collection</Link>
-              <div className="flex items-center gap-4">
-                <div className="flex gap-1 text-premium-gold">{[1, 2, 3, 4, 5].map(i => <Star key={i} size={16} fill="currentColor" />)}</div>
-                <span className="text-sm font-medium text-white/80">(2743 Reviews)</span>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-left"
+            >
+              <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">Modern Watches For <br /> Every Occasion</h2>
+              <p className="text-white/70 text-lg mb-12 max-w-2xl leading-relaxed">A perfect balance of style and performance for every moment. Whether it's a formal gala or a casual weekend, VORREX is your perfect companion.</p>
+              <div className="flex flex-col items-start gap-8">
+                <Link to="/shop" className="bg-premium-gold text-bottle-green px-12 py-5 rounded-full font-bold hover:bg-premium-gold-light transition-all w-fit premium-shadow text-lg">Explore Our Collection</Link>
+                <div className="flex items-center gap-4">
+                  <div className="flex gap-1 text-premium-gold">{[1, 2, 3, 4, 5].map(i => <Star key={i} size={16} fill="currentColor" />)}</div>
+                  <span className="text-sm font-medium text-white/80">(2743 Reviews)</span>
+                </div>
               </div>
-            </div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 50, rotate: 10 }} whileInView={{ opacity: 1, x: 0, rotate: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="relative">
-            <div className="absolute inset-0 bg-white/10 rounded-full blur-3xl scale-75"></div>
-            <img src="https://images.unsplash.com/photo-1508685096489-7aac29625a3b?auto=format&fit=crop&q=80&w=1000" alt="Modern Watch" className="w-full h-auto object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] rounded-[40px] border-2 border-white/10" referrerPolicy="no-referrer" />
-          </motion.div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative hidden md:block"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1619134778706-7015533a6150?w=1000" 
+                alt="Luxury VORREX Watch" 
+                className="w-full rounded-[40px] shadow-2xl border border-white/10"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute -bottom-6 -left-6 bg-premium-gold p-8 rounded-3xl shadow-xl">
+                <p className="text-bottle-green font-serif font-bold text-3xl">2024</p>
+                <p className="text-bottle-green/60 text-xs font-bold uppercase tracking-widest">Edition</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </motion.div>
@@ -690,10 +715,11 @@ const ShopPage = () => {
   const searchQuery = searchParams.get("search")?.toLowerCase() || "";
   
   const [filter, setFilter] = useState("All");
-  const categories = ["All", "Chronograph", "Classic", "Professional", "Diver", "Luxury"];
+  const categories = ["All", "New Arrivals", "Chronograph", "Classic", "Professional", "Diver", "Luxury"];
   
   const filteredProducts = PRODUCTS.filter(p => {
-    const matchesFilter = filter === "All" || p.category === filter;
+    const matchesFilter = filter === "All" || 
+                         (filter === "New Arrivals" ? p.badge === "New Arrival" : p.category === filter);
     const matchesSearch = !searchQuery || 
                          p.name.toLowerCase().includes(searchQuery) || 
                          p.model.toLowerCase().includes(searchQuery) || 
@@ -710,23 +736,42 @@ const ShopPage = () => {
     >
       <section>
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-          <span className="text-premium-gold font-medium tracking-[0.3em] uppercase text-sm mb-4 block">Our Collection</span>
-          <h1 className="text-5xl md:text-7xl font-bold text-bottle-green mb-8">
-            {searchQuery ? `Results for "${searchQuery}"` : "The Masterpieces"}
-          </h1>
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((cat) => (
-              <button 
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-8 py-2 rounded-full text-sm font-medium transition-all ${filter === cat ? "bg-bottle-green text-white premium-shadow" : "bg-gray-100 text-gray-500 hover:bg-gray-200"}`}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="text-center mb-24">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-premium-gold font-bold tracking-[0.5em] uppercase text-xs mb-6 block"
+            >
+              Exquisite Craftsmanship
+            </motion.span>
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-6xl md:text-8xl font-serif font-bold text-bottle-green mb-12 tracking-tighter"
+            >
+              {searchQuery ? `Results for "${searchQuery}"` : "The Masterpieces"}
+            </motion.h1>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-wrap justify-center gap-3"
+            >
+              {categories.map((cat) => (
+                <button 
+                  key={cat}
+                  onClick={() => setFilter(cat)}
+                  className={`px-10 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 ${filter === cat ? "bg-bottle-green text-white premium-shadow scale-105" : "bg-white text-gray-400 hover:text-bottle-green border border-gray-100"}`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </motion.div>
           </div>
-        </div>
 
         {filteredProducts.length > 0 ? (
           <div className="grid md:grid-cols-3 gap-10">
@@ -738,30 +783,32 @@ const ShopPage = () => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
-                  className="group"
+                  className="group flex flex-col h-full"
                 >
-                  <div className="relative bg-white rounded-3xl aspect-[4/5] mb-6 overflow-hidden flex items-center justify-center p-12 transition-all duration-500 group-hover:bg-gray-50">
+                  <div className="relative bg-white rounded-3xl aspect-[4/5] mb-6 overflow-hidden transition-all duration-500 group-hover:bg-gray-50 flex-shrink-0">
                     {p.badge && (
-                      <span className="absolute top-6 left-6 bg-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-bottle-green premium-shadow border border-gray-100">
+                      <span className="absolute top-6 left-6 bg-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-bottle-green premium-shadow border border-gray-100 z-10">
                         {p.badge}
                       </span>
                     )}
-                    <Link to={`/product/${p.id}`} className="w-full h-full">
-                      <img src={p.img} alt={p.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
+                    <Link to={`/product/${p.id}`} className="w-full h-full block">
+                      <img src={p.img} alt={p.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
                     </Link>
                     <button 
                       onClick={() => addToCart(p)}
-                      className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-bottle-green text-white px-8 py-3 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 premium-shadow"
+                      className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-bottle-green text-white px-8 py-3 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 premium-shadow z-10"
                     >
                       Add to Cart
                     </button>
                   </div>
-                  <div className="text-center">
-                    <p className="text-gray-400 text-xs uppercase tracking-widest mb-1">{p.name}</p>
-                    <Link to={`/product/${p.id}`}>
-                      <h3 className="text-xl font-bold text-bottle-green mb-2 hover:text-premium-gold transition-colors">{p.model}</h3>
+                  <div className="text-center flex flex-col flex-grow">
+                    <p className="text-gray-400 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">{p.name}</p>
+                    <Link to={`/product/${p.id}`} className="mb-2 block">
+                      <h3 className="text-lg font-bold text-bottle-green hover:text-premium-gold transition-colors leading-tight px-4">{p.model}</h3>
                     </Link>
-                    <p className="text-premium-gold font-serif text-2xl">${p.price}</p>
+                    <div className="mt-auto">
+                      <p className="text-premium-gold font-serif text-xl">${p.price}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -800,7 +847,7 @@ const AboutPage = () => (
           </p>
         </motion.div>
         <div className="relative">
-          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1000" alt="Craftsmanship" className="w-full rounded-3xl premium-shadow" referrerPolicy="no-referrer" />
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1000" alt="Craftsmanship" className="w-full rounded-3xl premium-shadow" referrerPolicy="no-referrer" />
         </div>
       </div>
 
@@ -906,44 +953,66 @@ const ProductDetailPage = () => {
   if (!product) return <div className="pt-40 text-center">Product not found</div>;
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-24">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-32 pb-24">
       <section>
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
-        <div className="bg-white rounded-3xl p-12 aspect-square flex items-center justify-center relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 lg:gap-32 items-center">
+        <div className="bg-white rounded-[40px] aspect-[4/5] flex items-center justify-center relative overflow-hidden premium-shadow group">
           <motion.img 
-            initial={{ scale: 0.8, opacity: 0 }}
+            initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             src={product.img} 
             alt={product.name} 
-            className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl"
+            className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110"
             referrerPolicy="no-referrer"
           />
+          {product.badge && (
+            <span className="absolute top-8 left-8 bg-white/90 backdrop-blur-md px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-bottle-green shadow-xl">
+              {product.badge}
+            </span>
+          )}
         </div>
-        <div>
-          <span className="text-premium-gold font-medium tracking-[0.3em] uppercase text-sm mb-4 block">{product.category}</span>
-          <h1 className="text-5xl md:text-7xl font-bold text-bottle-green mb-4">{product.name}</h1>
-          <p className="text-2xl text-gray-400 mb-8 uppercase tracking-widest">{product.model}</p>
-          <p className="text-4xl font-serif text-premium-gold mb-8">${product.price}</p>
-          <p className="text-gray-600 text-lg leading-relaxed mb-12">{product.description}</p>
+        <div className="space-y-10">
+          <div>
+            <span className="text-premium-gold font-bold tracking-[0.4em] uppercase text-xs mb-6 block">{product.category}</span>
+            <h1 className="text-6xl lg:text-8xl font-serif font-bold text-bottle-green mb-4 tracking-tighter leading-none">{product.name}</h1>
+            <p className="text-xl text-gray-400 uppercase tracking-[0.3em] font-medium">{product.model}</p>
+          </div>
           
-          <div className="grid grid-cols-2 gap-6 mb-12">
-            <div className="p-6 bg-gray-50 rounded-3xl">
-              <ShieldCheck className="text-premium-gold mb-3" />
-              <h4 className="font-bold text-bottle-green">2 Year Warranty</h4>
-            </div>
-            <div className="p-6 bg-gray-50 rounded-3xl">
-              <Clock className="text-premium-gold mb-3" />
-              <h4 className="font-bold text-bottle-green">Free Shipping</h4>
+          <div className="flex items-center gap-6">
+            <p className="text-5xl font-serif text-premium-gold">${product.price}</p>
+            <div className="h-10 w-px bg-gray-200"></div>
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1 text-premium-gold">
+                {[1, 2, 3, 4, 5].map(i => <Star key={i} size={16} fill="currentColor" />)}
+              </div>
+              <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">(4.9/5.0)</span>
             </div>
           </div>
 
-          <button 
-            onClick={() => addToCart(product)}
-            className="w-full bg-bottle-green text-white py-5 rounded-full font-bold text-lg hover:bg-bottle-green-light transition-all premium-shadow flex items-center justify-center gap-3"
-          >
-            Add to Shopping Bag <ArrowRight size={20} />
-          </button>
+          <p className="text-gray-500 text-lg leading-relaxed max-w-xl">{product.description}</p>
+          
+          <div className="pt-8 space-y-6">
+            <div className="flex gap-4">
+              <button 
+                onClick={() => addToCart(product)}
+                className="flex-1 bg-bottle-green text-white py-6 rounded-full font-bold text-lg hover:bg-bottle-green-light transition-all premium-shadow flex items-center justify-center gap-3"
+              >
+                Add to Shopping Bag <ArrowRight size={20} />
+              </button>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-6 bg-gray-50 rounded-3xl border border-gray-100">
+                <ShieldCheck className="text-premium-gold mb-3" size={24} />
+                <h4 className="font-bold text-bottle-green text-sm uppercase tracking-widest">2 Year Warranty</h4>
+              </div>
+              <div className="p-6 bg-gray-50 rounded-3xl border border-gray-100">
+                <Clock className="text-premium-gold mb-3" size={24} />
+                <h4 className="font-bold text-bottle-green text-sm uppercase tracking-widest">Free Shipping</h4>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -967,7 +1036,7 @@ const LoginPage = () => {
       if (isRegister) {
         // Simple validation
         if (password.length < 6) {
-          throw new Error("Password should be at least 6 characters.");
+          throw { code: "auth/weak-password" };
         }
         const userCred = await createUserWithEmailAndPassword(auth, email, password);
         await setDoc(doc(db, "users", userCred.user.uid), {
@@ -981,10 +1050,17 @@ const LoginPage = () => {
       }
       navigate("/");
     } catch (err: any) {
-      let msg = err.message;
-      if (err.code === "auth/user-not-found") msg = "No account found with this email.";
-      if (err.code === "auth/wrong-password") msg = "Incorrect password.";
-      if (err.code === "auth/email-already-in-use") msg = "This email is already registered.";
+      let msg = "An unexpected error occurred. Please try again.";
+      const code = err.code || "";
+      
+      if (code === "auth/user-not-found") msg = "No account found with this email address.";
+      else if (code === "auth/wrong-password") msg = "The password you entered is incorrect.";
+      else if (code === "auth/email-already-in-use") msg = "This email is already registered.";
+      else if (code === "auth/invalid-email") msg = "Please enter a valid email address.";
+      else if (code === "auth/weak-password") msg = "Password should be at least 6 characters.";
+      else if (code === "auth/too-many-requests") msg = "Too many failed attempts. Please try again later.";
+      else if (err.message) msg = err.message;
+      
       setError(msg);
     } finally {
       setLoading(false);

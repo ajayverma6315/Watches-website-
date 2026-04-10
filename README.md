@@ -1,21 +1,20 @@
-# VORREX — Luxury Watch Brand Website
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-A premium, editorial-quality watch brand website built 
-with modern web technologies.
-## ✨ Features
-- Luxury editorial design aesthetic
-- Responsive across all devices
-- Smooth animations & transitions
-- Premium product showcase layout
+# Run and deploy your AI Studio app
 
-## 🛠 Tech Stack
-- TypeScript
-- CSS3 (Custom animations)
-- HTML5
-- Vite
+This contains everything you need to run your app locally.
 
-## 👨‍💻 Developer
-Built by **Ajay Verma** — Freelance Web Developer & 
-Digital Marketing Specialist based in Rajasthan, India.
+View your app in AI Studio: https://ai.studio/apps/a570fcf7-07c8-480a-a4f4-77fde490acf2
 
-📩 Available for freelance projects
+## Run Locally
+
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

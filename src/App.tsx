@@ -128,6 +128,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -148,45 +149,45 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between transition-all duration-300 ${isScrolled ? "glass-nav shadow-lg py-3" : "bg-transparent"}`}>
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl font-serif font-bold tracking-tighter text-bottle-green">VORREX</span>
+      <nav className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-10 py-4 flex items-center justify-between transition-all duration-500 ${isScrolled ? "glass-nav shadow-lg py-3" : "bg-transparent"}`}>
+        <Link to="/" className="flex items-center gap-2 group">
+          <span className="text-2xl md:text-3xl font-serif font-bold tracking-tighter text-bottle-green group-hover:text-premium-gold transition-colors">VORREX</span>
         </Link>
         
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium uppercase tracking-widest text-gray-600">
-          <Link to="/" className={`hover:text-bottle-green transition-colors ${location.pathname === "/" ? "text-bottle-green" : ""}`}>Home</Link>
-          <Link to="/shop" className={`hover:text-bottle-green transition-colors ${location.pathname === "/shop" ? "text-bottle-green" : ""}`}>Shop</Link>
-          <Link to="/about" className={`hover:text-bottle-green transition-colors ${location.pathname === "/about" ? "text-bottle-green" : ""}`}>About</Link>
-          <Link to="/contact" className={`hover:text-bottle-green transition-colors ${location.pathname === "/contact" ? "text-bottle-green" : ""}`}>Contact</Link>
+        <div className="hidden lg:flex items-center gap-10 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-500">
+          <Link to="/" className={`hover:text-bottle-green transition-all relative py-2 ${location.pathname === "/" ? "text-bottle-green after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-bottle-green" : ""}`}>Home</Link>
+          <Link to="/shop" className={`hover:text-bottle-green transition-all relative py-2 ${location.pathname === "/shop" ? "text-bottle-green after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-bottle-green" : ""}`}>Shop</Link>
+          <Link to="/about" className={`hover:text-bottle-green transition-all relative py-2 ${location.pathname === "/about" ? "text-bottle-green after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-bottle-green" : ""}`}>About</Link>
+          <Link to="/contact" className={`hover:text-bottle-green transition-all relative py-2 ${location.pathname === "/contact" ? "text-bottle-green after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-bottle-green" : ""}`}>Contact</Link>
         </div>
         
-        <div className="flex items-center gap-4 md:gap-6">
+        <div className="flex items-center gap-2 md:gap-6">
           <button 
             onClick={() => setIsSearchOpen(true)}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors"
           >
-            <Search size={20} className="text-bottle-green" />
+            <Search size={18} className="text-bottle-green" />
           </button>
           
-          <div className="relative group hidden md:block">
+          <div className="relative group hidden sm:block">
             {user ? (
               <div className="flex items-center gap-3">
                 <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                  <User size={20} className="text-bottle-green" />
+                  <User size={18} className="text-bottle-green" />
                 </button>
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                  <div className="px-4 py-2 border-b border-gray-50 mb-2">
-                    <p className="text-xs text-gray-400 uppercase tracking-widest">Account</p>
+                <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-3xl shadow-2xl border border-gray-100 py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all translate-y-2 group-hover:translate-y-0">
+                  <div className="px-6 py-3 border-b border-gray-50 mb-2">
+                    <p className="text-[9px] text-gray-400 uppercase tracking-[0.2em] font-bold">Account</p>
                     <p className="text-sm font-bold text-bottle-green truncate">{user.email}</p>
                   </div>
-                  <button onClick={logout} className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 flex items-center gap-2">
-                    <LogOut size={16} /> Logout
+                  <button onClick={logout} className="w-full text-left px-6 py-3 text-sm text-red-500 hover:bg-red-50 flex items-center gap-3 transition-colors">
+                    <LogOut size={16} /> <span className="font-bold uppercase tracking-widest text-[10px]">Logout</span>
                   </button>
                 </div>
               </div>
             ) : (
               <Link to="/login" className="p-2 hover:bg-gray-100 rounded-full transition-colors block">
-                <User size={20} className="text-bottle-green" />
+                <User size={18} className="text-bottle-green" />
               </Link>
             )}
           </div>
@@ -195,24 +196,51 @@ const Navbar = () => {
             onClick={() => setIsCartOpen(true)}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors relative"
           >
-            <ShoppingCart size={20} className="text-bottle-green" />
+            <ShoppingCart size={18} className="text-bottle-green" />
             {totalItems > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-premium-gold text-white text-[10px] flex items-center justify-center rounded-full">
+              <span className="absolute top-0 right-0 bg-premium-gold text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-lg">
                 {totalItems}
               </span>
             )}
           </button>
-          <Link to="/shop" className="hidden md:block bg-bottle-green text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-bottle-green-light transition-all premium-shadow">
-            Shop Now
-          </Link>
+
           <button 
-            onClick={() => setIsMenuOpen(true)}
-            className="md:hidden p-2 text-bottle-green"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-full transition-colors"
           >
-            <Menu size={24} />
+            {isMobileMenuOpen ? <X size={20} className="text-bottle-green" /> : <Menu size={20} className="text-bottle-green" />}
           </button>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-40 bg-white pt-32 px-6 lg:hidden"
+          >
+            <div className="flex flex-col gap-10 text-center">
+              <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="text-4xl font-serif font-bold text-bottle-green tracking-tighter">Home</Link>
+              <Link to="/shop" onClick={() => setIsMobileMenuOpen(false)} className="text-4xl font-serif font-bold text-bottle-green tracking-tighter">Shop</Link>
+              <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-4xl font-serif font-bold text-bottle-green tracking-tighter">About</Link>
+              <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-4xl font-serif font-bold text-bottle-green tracking-tighter">Contact</Link>
+              <div className="pt-12 border-t border-gray-100">
+                {user ? (
+                  <div className="space-y-8">
+                    <p className="text-sm font-bold text-bottle-green">{user.email}</p>
+                    <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="text-red-500 font-bold uppercase tracking-[0.3em] text-[10px]">Logout Account</button>
+                  </div>
+                ) : (
+                  <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="bg-bottle-green text-white px-12 py-5 rounded-full font-bold uppercase tracking-[0.3em] text-[10px] inline-block premium-shadow">Login / Register</Link>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Search Overlay */}
       <AnimatePresence>
@@ -281,54 +309,54 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[80%] max-w-sm bg-white z-[70] shadow-2xl flex flex-col"
+              className="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white z-[70] shadow-2xl flex flex-col"
             >
-              <div className="p-6 border-b border-gray-100 flex justify-between items-center">
-                <span className="text-xl font-serif font-bold text-bottle-green">VORREX</span>
-                <button onClick={() => setIsMenuOpen(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <div className="p-8 md:p-10 border-b border-gray-50 flex justify-between items-center">
+                <span className="text-2xl md:text-3xl font-serif font-bold text-bottle-green tracking-tighter">VORREX</span>
+                <button onClick={() => setIsMenuOpen(false)} className="p-3 hover:bg-gray-100 rounded-full transition-colors">
                   <X size={24} className="text-bottle-green" />
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-6">
+              <div className="flex-1 overflow-y-auto p-8 md:p-10">
                 {/* User Profile Section */}
-                <div className="mb-10 p-6 bg-gray-50 rounded-3xl">
+                <div className="mb-12 p-8 bg-gray-50 rounded-[40px] border border-gray-100">
                   {user ? (
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-bottle-green text-white rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-5">
+                        <div className="w-14 h-14 bg-bottle-green text-white rounded-2xl flex items-center justify-center font-bold text-xl shadow-lg">
                           {user.email?.charAt(0).toUpperCase()}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs text-gray-400 uppercase tracking-widest">Welcome back</p>
+                          <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold">Welcome back</p>
                           <p className="text-sm font-bold text-bottle-green truncate">{user.email}</p>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-4">
                         <Link 
                           to="/checkout" 
                           onClick={() => setIsMenuOpen(false)}
-                          className="flex flex-col items-center justify-center p-3 bg-white rounded-2xl border border-gray-100 hover:border-premium-gold transition-colors"
+                          className="flex flex-col items-center justify-center p-4 bg-white rounded-3xl border border-gray-100 hover:border-premium-gold transition-all group"
                         >
-                          <ShoppingCart size={18} className="text-premium-gold mb-1" />
-                          <span className="text-[10px] font-bold uppercase tracking-tighter text-bottle-green">Orders</span>
+                          <ShoppingCart size={20} className="text-premium-gold mb-2 group-hover:scale-110 transition-transform" />
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-bottle-green">Orders</span>
                         </Link>
                         <button 
                           onClick={() => { logout(); setIsMenuOpen(false); }}
-                          className="flex flex-col items-center justify-center p-3 bg-white rounded-2xl border border-gray-100 hover:text-red-500 transition-colors"
+                          className="flex flex-col items-center justify-center p-4 bg-white rounded-3xl border border-gray-100 hover:bg-red-50 hover:border-red-100 transition-all group"
                         >
-                          <LogOut size={18} className="text-gray-400 mb-1" />
-                          <span className="text-[10px] font-bold uppercase tracking-tighter text-bottle-green">Logout</span>
+                          <LogOut size={20} className="text-gray-400 group-hover:text-red-500 mb-2 group-hover:scale-110 transition-transform" />
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-bottle-green">Logout</span>
                         </button>
                       </div>
                     </div>
                   ) : (
-                    <div className="text-center">
-                      <p className="text-gray-500 text-sm mb-4">Sign in to track your orders and save your favorites.</p>
+                    <div className="text-center space-y-6">
+                      <p className="text-gray-500 text-sm font-medium leading-relaxed">Sign in to track your orders and save your favorites.</p>
                       <Link 
                         to="/login" 
                         onClick={() => setIsMenuOpen(false)}
-                        className="block w-full bg-bottle-green text-white py-3 rounded-full font-bold text-sm"
+                        className="block w-full bg-bottle-green text-white py-4 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] premium-shadow"
                       >
                         Sign In / Sign Up
                       </Link>
@@ -337,32 +365,32 @@ const Navbar = () => {
                 </div>
 
                 {/* Navigation Links */}
-                <div className="space-y-2">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 px-2">Navigation</p>
+                <div className="space-y-3">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-6 px-4">Navigation</p>
                   {[
-                    { name: "Home", path: "/", icon: <Star size={18} /> },
-                    { name: "Shop Collection", path: "/shop", icon: <Gem size={18} /> },
-                    { name: "Our Story", path: "/about", icon: <Clock size={18} /> },
-                    { name: "Contact Us", path: "/contact", icon: <Mail size={18} /> },
+                    { name: "Home", path: "/", icon: <Star size={20} /> },
+                    { name: "Shop Collection", path: "/shop", icon: <Gem size={20} /> },
+                    { name: "Our Story", path: "/about", icon: <Clock size={20} /> },
+                    { name: "Contact Us", path: "/contact", icon: <Mail size={20} /> },
                   ].map((link) => (
                     <Link 
                       key={link.path}
                       to={link.path}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`flex items-center gap-4 p-4 rounded-2xl transition-all ${location.pathname === link.path ? "bg-bottle-green text-white shadow-lg" : "hover:bg-gray-50 text-bottle-green"}`}
+                      className={`flex items-center gap-5 p-5 rounded-[32px] transition-all duration-500 ${location.pathname === link.path ? "bg-bottle-green text-white shadow-2xl scale-[1.02]" : "hover:bg-gray-50 text-bottle-green"}`}
                     >
                       <span className={location.pathname === link.path ? "text-white" : "text-premium-gold"}>
                         {link.icon}
                       </span>
-                      <span className="font-bold text-sm uppercase tracking-widest">{link.name}</span>
-                      <ChevronRight size={16} className="ml-auto opacity-30" />
+                      <span className="font-bold text-sm uppercase tracking-[0.2em]">{link.name}</span>
+                      <ChevronRight size={18} className={`ml-auto transition-opacity ${location.pathname === link.path ? "opacity-100" : "opacity-20"}`} />
                     </Link>
                   ))}
                 </div>
               </div>
 
-              <div className="p-6 border-t border-gray-100">
-                <p className="text-[10px] text-center text-gray-400 uppercase tracking-widest">© 2024 VORREX Luxury</p>
+              <div className="p-8 md:p-10 border-t border-gray-50 text-center">
+                <p className="text-[9px] text-gray-400 uppercase tracking-[0.4em] font-bold">© 2024 VORREX LUXURY</p>
               </div>
             </motion.div>
           </>
@@ -480,76 +508,77 @@ const HomePage = () => {
       exit={{ opacity: 0 }}
     >
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 md:px-20 overflow-hidden bg-white">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <section className="relative pt-32 md:pt-48 pb-20 px-4 md:px-10 overflow-hidden bg-white">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-center lg:text-left"
           >
-            <span className="text-premium-gold font-medium tracking-[0.4em] uppercase text-sm mb-6 block">The Art of Precision</span>
-            <h1 className="text-6xl md:text-8xl font-bold leading-[0.9] mb-8 text-bottle-green">
+            <span className="text-premium-gold font-bold tracking-[0.5em] uppercase text-[10px] mb-6 block">The Art of Precision</span>
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.85] mb-8 text-bottle-green tracking-tighter">
               VORREX <br /> 
-              <span className="italic font-normal text-gray-400">Excellence</span>
+              <span className="italic font-light text-gray-300">Excellence</span>
             </h1>
-            <p className="text-gray-600 text-lg mb-10 max-w-md leading-relaxed">
+            <p className="text-gray-500 text-base md:text-lg mb-10 max-w-md mx-auto lg:mx-0 leading-relaxed font-medium">
               Experience the pinnacle of horological mastery. Where Swiss heritage meets avant-garde design.
             </p>
-            <div className="flex flex-wrap gap-6 items-center">
-              <Link to="/shop" className="bg-bottle-green text-white px-10 py-4 rounded-full font-bold hover:bg-bottle-green-light transition-all flex items-center gap-3 premium-shadow group">
+            <div className="flex flex-wrap gap-4 md:gap-6 items-center justify-center lg:justify-start">
+              <Link to="/shop" className="bg-bottle-green text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-bold hover:bg-bottle-green-light transition-all flex items-center gap-3 premium-shadow group text-sm uppercase tracking-widest">
                 Explore Collection
                 <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
               </Link>
             </div>
             
-            <div className="mt-12 flex items-center gap-8">
+            <div className="mt-16 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8">
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
-                  <img key={i} src={`https://picsum.photos/seed/user${i}/100/100`} alt="User" className="w-10 h-10 rounded-full border-2 border-white object-cover" referrerPolicy="no-referrer" />
+                  <img key={i} src={`https://picsum.photos/seed/user${i}/100/100`} alt="User" className="w-10 h-10 md:w-12 md:h-12 rounded-full border-4 border-white object-cover shadow-sm" referrerPolicy="no-referrer" />
                 ))}
               </div>
-              <div>
-                <div className="flex items-center gap-1 text-premium-gold">
-                  <Star size={14} fill="currentColor" />
-                  <span className="text-sm font-bold text-bottle-green">4.9/5</span>
+              <div className="text-center sm:text-left">
+                <div className="flex items-center justify-center sm:justify-start gap-1 text-premium-gold mb-1">
+                  {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} fill="currentColor" />)}
+                  <span className="text-sm font-bold text-bottle-green ml-2">4.9/5</span>
                 </div>
-                <p className="text-xs text-gray-400 uppercase tracking-widest">Global Excellence</p>
+                <p className="text-[9px] text-gray-400 uppercase tracking-[0.2em] font-bold">Trusted by 10k+ Collectors</p>
               </div>
             </div>
           </motion.div>
           
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative"
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="relative px-4 sm:px-10 lg:px-0"
           >
             {/* Clean Container */}
-            <div className="bg-white rounded-[40px] relative overflow-hidden premium-shadow aspect-[4/5] flex items-center justify-center border border-gray-100">
+            <div className="bg-white rounded-[40px] md:rounded-[60px] relative overflow-hidden premium-shadow aspect-[4/5] flex items-center justify-center border border-gray-100 group">
               <video 
                 autoPlay 
                 muted 
                 loop 
                 playsInline
                 poster="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=1600"
-                className="absolute inset-0 w-full h-full object-cover z-0"
+                className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-1000 group-hover:scale-105"
               >
                 <source src="https://videos.pexels.com/video-files/4440954/4440954-sd_640_360_24fps.mp4" type="video/mp4" />
               </video>
               
-              <div className="absolute top-6 left-6 z-20">
-                <span className="bg-white/40 backdrop-blur-xl border border-white/50 text-bottle-green text-[9px] font-bold uppercase tracking-[0.3em] px-4 py-2 rounded-full flex items-center gap-2 shadow-lg">
+              <div className="absolute top-6 left-6 md:top-10 md:left-10 z-20">
+                <span className="bg-white/40 backdrop-blur-xl border border-white/50 text-bottle-green text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] px-4 py-2 md:px-6 md:py-3 rounded-full flex items-center gap-2 shadow-lg">
                   <span className="w-1.5 h-1.5 bg-premium-gold rounded-full animate-pulse"></span>
-                  Exclusive Collection
+                  Limited Edition 2024
                 </span>
               </div>
               
-              <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end z-20">
-                <div className="bg-white/20 backdrop-blur-md p-4 rounded-2xl border border-white/30">
-                  <p className="text-bottle-green text-xs uppercase tracking-[0.2em] mb-1 font-bold">Masterpiece 2024</p>
-                  <h3 className="text-bottle-green text-3xl font-serif font-bold">VORREX Grand</h3>
+              <div className="absolute bottom-6 left-6 right-6 md:bottom-12 md:left-12 md:right-12 flex flex-col sm:flex-row justify-between items-center sm:items-end gap-4 z-20">
+                <div className="bg-white/20 backdrop-blur-md p-4 md:p-6 rounded-3xl border border-white/30 w-full sm:w-auto text-center sm:text-left">
+                  <p className="text-bottle-green text-[9px] uppercase tracking-[0.3em] mb-2 font-bold opacity-70">Masterpiece Series</p>
+                  <h3 className="text-bottle-green text-2xl md:text-4xl font-serif font-bold">VORREX Grand</h3>
                 </div>
-                <div className="bg-white/20 backdrop-blur-md p-4 rounded-2xl border border-white/30 text-premium-gold text-3xl font-serif font-bold">$2,499</div>
+                <div className="bg-premium-gold p-4 md:p-6 rounded-3xl shadow-2xl text-white text-2xl md:text-4xl font-serif font-bold w-full sm:w-auto text-center">$2,499</div>
               </div>
             </div>
 
@@ -580,8 +609,8 @@ const HomePage = () => {
       </section>
 
       {/* Features */}
-      <section className="bg-gray-50">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+      <section className="bg-gray-50 py-20 md:py-32 px-4 md:px-10">
+        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
           {[
             { icon: <ShieldCheck className="text-premium-gold" />, title: "Trusted Precision", desc: "High-quality quartz movement ensures accurate and dependable timekeeping." },
             { icon: <Gem className="text-premium-gold" />, title: "Elegant Craftsmanship", desc: "Refined designs with premium finishes, crafted for everyday elegance." },
@@ -594,63 +623,65 @@ const HomePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-3xl premium-shadow hover:-translate-y-2 transition-all duration-300"
+              className="bg-white p-8 md:p-10 rounded-[40px] premium-shadow hover:-translate-y-2 transition-all duration-500 border border-gray-50 group"
             >
-              <div className="w-12 h-12 bg-bottle-green/5 rounded-2xl flex items-center justify-center mb-6">
+              <div className="w-14 h-14 bg-bottle-green/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-premium-gold/10 transition-colors">
                 {f.icon}
               </div>
-              <h3 className="text-xl font-bold mb-3 text-bottle-green">{f.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+              <h3 className="text-xl font-bold mb-4 text-bottle-green uppercase tracking-tight">{f.title}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed font-medium">{f.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* New Arrivals */}
-      <section>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-end mb-16">
-            <div>
-              <h2 className="text-5xl font-bold text-bottle-green mb-4">New Arrival</h2>
-              <div className="w-20 h-1 bg-premium-gold"></div>
+      <section className="py-20 md:py-32 px-4 md:px-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-8 mb-20">
+            <div className="text-center md:text-left">
+              <span className="text-premium-gold font-bold tracking-[0.4em] uppercase text-[10px] mb-4 block">Curated Selection</span>
+              <h2 className="text-4xl md:text-6xl font-bold text-bottle-green tracking-tighter">New Arrivals</h2>
             </div>
-            <Link to="/shop" className="text-bottle-green font-bold uppercase tracking-widest text-sm flex items-center gap-2 hover:gap-4 transition-all">
-              View All Products <ArrowRight size={16} />
+            <Link to="/shop" className="text-bottle-green font-bold uppercase tracking-[0.2em] text-[10px] flex items-center gap-3 hover:text-premium-gold transition-all group">
+              View All Products <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             {PRODUCTS.filter(p => p.badge === "New Arrival").slice(0, 3).map((p, i) => (
               <motion.div 
                 key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
                 className="group flex flex-col h-full"
               >
-                <div className="relative bg-white rounded-3xl aspect-[4/5] mb-6 overflow-hidden transition-all duration-500 group-hover:bg-gray-50 flex-shrink-0">
+                <div className="relative bg-white rounded-[40px] aspect-[4/5] mb-8 overflow-hidden premium-shadow border border-gray-50">
                   {p.badge && (
-                    <span className="absolute top-6 left-6 bg-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-bottle-green premium-shadow border border-gray-100 z-10">
+                    <span className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2 rounded-full text-[9px] font-bold uppercase tracking-widest text-bottle-green shadow-lg z-10">
                       {p.badge}
                     </span>
                   )}
                   <Link to={`/product/${p.id}`} className="w-full h-full block">
-                    <img src={p.img} alt={p.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
+                    <img src={p.img} alt={p.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-1000" referrerPolicy="no-referrer" />
                   </Link>
                   <button 
                     onClick={() => addToCart(p)}
-                    className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-bottle-green text-white px-8 py-3 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 premium-shadow z-10"
+                    className="absolute bottom-8 left-8 right-8 bg-bottle-green text-white py-4 rounded-full text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-2xl z-10"
                   >
                     Add to Cart
                   </button>
                 </div>
-                <div className="text-center flex flex-col flex-grow">
-                  <p className="text-gray-400 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">{p.name}</p>
-                  <Link to={`/product/${p.id}`} className="mb-2 block">
-                    <h3 className="text-lg font-bold text-bottle-green hover:text-premium-gold transition-colors leading-tight px-4">{p.model}</h3>
+                <div className="text-center px-4 flex flex-col flex-grow">
+                  <p className="text-gray-400 text-[9px] uppercase tracking-[0.3em] mb-3 font-bold">{p.category}</p>
+                  <Link to={`/product/${p.id}`} className="mb-3 block">
+                    <h3 className="text-xl md:text-2xl font-serif font-bold text-bottle-green hover:text-premium-gold transition-colors leading-tight">{p.name}</h3>
                   </Link>
+                  <p className="text-gray-400 text-[10px] uppercase tracking-widest mb-4 font-medium">{p.model}</p>
                   <div className="mt-auto">
-                    <p className="text-premium-gold font-serif text-xl">${p.price}</p>
+                    <p className="text-premium-gold font-serif text-2xl md:text-3xl font-bold">${p.price}</p>
                   </div>
                 </div>
               </motion.div>
@@ -660,45 +691,49 @@ const HomePage = () => {
       </section>
 
       {/* Modern Section */}
-      <section className="bg-bottle-green text-white overflow-hidden relative py-32">
-        <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+      <section className="bg-bottle-green text-white overflow-hidden relative py-24 md:py-40 px-4 md:px-10">
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#fff,transparent)] scale-150"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
             <motion.div 
-              initial={{ opacity: 0, x: -30 }} 
-              whileInView={{ opacity: 1, x: 0 }} 
+              initial={{ opacity: 0, y: 30 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-left"
+              className="text-center lg:text-left"
             >
-              <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">Modern Watches For <br /> Every Occasion</h2>
-              <p className="text-white/70 text-lg mb-12 max-w-2xl leading-relaxed">A perfect balance of style and performance for every moment. Whether it's a formal gala or a casual weekend, VORREX is your perfect companion.</p>
-              <div className="flex flex-col items-start gap-8">
-                <Link to="/shop" className="bg-premium-gold text-bottle-green px-12 py-5 rounded-full font-bold hover:bg-premium-gold-light transition-all w-fit premium-shadow text-lg">Explore Our Collection</Link>
+              <span className="text-premium-gold font-bold tracking-[0.5em] uppercase text-[10px] mb-8 block">Timeless Aesthetics</span>
+              <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-10 leading-[0.9] tracking-tighter">Modern Watches For <br /> <span className="text-gray-400 italic font-light">Every Occasion</span></h2>
+              <p className="text-white/60 text-base md:text-lg mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">A perfect balance of style and performance for every moment. Whether it's a formal gala or a casual weekend, VORREX is your perfect companion.</p>
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8">
+                <Link to="/shop" className="bg-premium-gold text-bottle-green px-10 md:px-14 py-4 md:py-5 rounded-full font-bold hover:bg-white transition-all w-full sm:w-fit premium-shadow text-sm uppercase tracking-widest">Explore Collection</Link>
                 <div className="flex items-center gap-4">
-                  <div className="flex gap-1 text-premium-gold">{[1, 2, 3, 4, 5].map(i => <Star key={i} size={16} fill="currentColor" />)}</div>
-                  <span className="text-sm font-medium text-white/80">(2743 Reviews)</span>
+                  <div className="flex gap-1 text-premium-gold">{[1, 2, 3, 4, 5].map(i => <Star key={i} size={14} fill="currentColor" />)}</div>
+                  <span className="text-xs font-bold text-white/40 uppercase tracking-widest">(2.7k+ Reviews)</span>
                 </div>
               </div>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative hidden md:block"
+              className="relative hidden lg:block"
             >
-              <img 
-                src="https://images.unsplash.com/photo-1619134778706-7015533a6150?w=1000" 
-                alt="Luxury VORREX Watch" 
-                className="w-full rounded-[40px] shadow-2xl border border-white/10"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-premium-gold p-8 rounded-3xl shadow-xl">
-                <p className="text-bottle-green font-serif font-bold text-3xl">2024</p>
-                <p className="text-bottle-green/60 text-xs font-bold uppercase tracking-widest">Edition</p>
+              <div className="relative rounded-[60px] overflow-hidden premium-shadow border border-white/10 aspect-square">
+                <img 
+                  src="https://images.unsplash.com/photo-1619134778706-7015533a6150?w=1000" 
+                  alt="Luxury VORREX Watch" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bottle-green/60 to-transparent"></div>
+              </div>
+              <div className="absolute -bottom-10 -left-10 bg-premium-gold p-10 rounded-[40px] shadow-2xl border-8 border-bottle-green">
+                <p className="text-bottle-green font-serif font-bold text-5xl">2024</p>
+                <p className="text-bottle-green/60 text-[10px] font-bold uppercase tracking-[0.3em]">Edition</p>
               </div>
             </motion.div>
           </div>
@@ -711,6 +746,7 @@ const HomePage = () => {
 const ShopPage = () => {
   const { addToCart } = useCart();
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search")?.toLowerCase() || "";
   
@@ -732,16 +768,16 @@ const ShopPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pt-24"
+      className="pt-32 md:pt-48 pb-20 px-4 md:px-10"
     >
       <section>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20 md:mb-32">
             <motion.span 
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-premium-gold font-bold tracking-[0.5em] uppercase text-xs mb-6 block"
+              className="text-premium-gold font-bold tracking-[0.5em] uppercase text-[10px] mb-8 block"
             >
               Exquisite Craftsmanship
             </motion.span>
@@ -750,22 +786,22 @@ const ShopPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-6xl md:text-8xl font-serif font-bold text-bottle-green mb-12 tracking-tighter"
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold text-bottle-green mb-16 tracking-tighter"
             >
-              {searchQuery ? `Results for "${searchQuery}"` : "The Masterpieces"}
+              {searchQuery ? `Results for "${searchQuery}"` : "The Collection"}
             </motion.h1>
             <motion.div 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="flex flex-wrap justify-center gap-3"
+              className="flex flex-wrap justify-center gap-3 md:gap-4"
             >
               {categories.map((cat) => (
                 <button 
                   key={cat}
                   onClick={() => setFilter(cat)}
-                  className={`px-10 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 ${filter === cat ? "bg-bottle-green text-white premium-shadow scale-105" : "bg-white text-gray-400 hover:text-bottle-green border border-gray-100"}`}
+                  className={`px-6 md:px-10 py-3 md:py-4 rounded-full text-[9px] font-bold uppercase tracking-widest transition-all duration-500 border ${filter === cat ? "bg-bottle-green text-white border-bottle-green premium-shadow scale-105" : "bg-white text-gray-400 hover:text-bottle-green border-gray-100"}`}
                 >
                   {cat}
                 </button>
@@ -774,7 +810,7 @@ const ShopPage = () => {
           </div>
 
         {filteredProducts.length > 0 ? (
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((p) => (
                 <motion.div 
@@ -783,31 +819,33 @@ const ShopPage = () => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
                   className="group flex flex-col h-full"
                 >
-                  <div className="relative bg-white rounded-3xl aspect-[4/5] mb-6 overflow-hidden transition-all duration-500 group-hover:bg-gray-50 flex-shrink-0">
+                  <div className="relative bg-white rounded-[40px] aspect-[4/5] mb-8 overflow-hidden premium-shadow border border-gray-50">
                     {p.badge && (
-                      <span className="absolute top-6 left-6 bg-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-bottle-green premium-shadow border border-gray-100 z-10">
+                      <span className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2 rounded-full text-[9px] font-bold uppercase tracking-widest text-bottle-green shadow-lg z-10">
                         {p.badge}
                       </span>
                     )}
                     <Link to={`/product/${p.id}`} className="w-full h-full block">
-                      <img src={p.img} alt={p.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
+                      <img src={p.img} alt={p.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-1000" referrerPolicy="no-referrer" />
                     </Link>
                     <button 
                       onClick={() => addToCart(p)}
-                      className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-bottle-green text-white px-8 py-3 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 premium-shadow z-10"
+                      className="absolute bottom-8 left-8 right-8 bg-bottle-green text-white py-4 rounded-full text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-2xl z-10"
                     >
                       Add to Cart
                     </button>
                   </div>
-                  <div className="text-center flex flex-col flex-grow">
-                    <p className="text-gray-400 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">{p.name}</p>
-                    <Link to={`/product/${p.id}`} className="mb-2 block">
-                      <h3 className="text-lg font-bold text-bottle-green hover:text-premium-gold transition-colors leading-tight px-4">{p.model}</h3>
+                  <div className="text-center px-4 flex flex-col flex-grow">
+                    <p className="text-gray-400 text-[9px] uppercase tracking-[0.3em] mb-3 font-bold">{p.category}</p>
+                    <Link to={`/product/${p.id}`} className="mb-3 block">
+                      <h3 className="text-xl md:text-2xl font-serif font-bold text-bottle-green hover:text-premium-gold transition-colors leading-tight">{p.name}</h3>
                     </Link>
+                    <p className="text-gray-400 text-[10px] uppercase tracking-widest mb-4 font-medium">{p.model}</p>
                     <div className="mt-auto">
-                      <p className="text-premium-gold font-serif text-xl">${p.price}</p>
+                      <p className="text-premium-gold font-serif text-2xl md:text-3xl font-bold">${p.price}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -815,9 +853,10 @@ const ShopPage = () => {
             </AnimatePresence>
           </div>
         ) : (
-          <div className="text-center py-20">
-            <h3 className="text-2xl font-serif text-gray-400 mb-4">No products found matching your search.</h3>
-            <button onClick={() => setFilter("All")} className="text-premium-gold font-bold uppercase tracking-widest text-sm">Clear Filters</button>
+          <div className="text-center py-32 bg-gray-50 rounded-[60px] border border-dashed border-gray-200">
+            <Search size={48} className="text-gray-200 mx-auto mb-6" />
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-bottle-green mb-4">No products found matching your search.</h3>
+            <button onClick={() => { setFilter("All"); navigate("/shop"); }} className="text-premium-gold font-bold uppercase tracking-[0.3em] text-[10px] hover:text-bottle-green transition-colors">Clear All Filters</button>
           </div>
         )}
       </div>
@@ -831,44 +870,50 @@ const AboutPage = () => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    className="pt-24"
+    className="pt-32 md:pt-48 pb-20 px-4 md:px-10"
   >
     <section>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-20 items-center mb-32">
-        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-          <span className="text-premium-gold font-medium tracking-[0.3em] uppercase text-sm mb-4 block">Our Story</span>
-          <h2 className="text-5xl md:text-7xl font-bold text-bottle-green mb-8 leading-tight">Crafting Excellence <br /> Since 1994</h2>
-          <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-            Founded in the heart of Switzerland, VORREX began with a simple vision: to create timepieces that transcend trends and become part of a person's legacy.
-          </p>
-          <p className="text-gray-600 text-lg leading-relaxed">
-            Every VORREX watch is the result of hundreds of hours of meticulous work by master horologists, combining centuries-old techniques with cutting-edge materials.
-          </p>
-        </motion.div>
-        <div className="relative">
-          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1000" alt="Craftsmanship" className="w-full rounded-3xl premium-shadow" referrerPolicy="no-referrer" />
+      <div className="max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center mb-32 md:mb-48">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <span className="text-premium-gold font-bold tracking-[0.5em] uppercase text-[10px] mb-8 block">Our Legacy</span>
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-bottle-green mb-10 leading-[0.9] tracking-tighter">Crafting Excellence <br /> <span className="text-gray-300 italic font-light">Since 1994</span></h2>
+            <p className="text-gray-500 text-lg mb-8 leading-relaxed font-medium">
+              Founded in the heart of Switzerland, VORREX began with a simple vision: to create timepieces that transcend trends and become part of a person's legacy.
+            </p>
+            <p className="text-gray-500 text-lg leading-relaxed font-medium">
+              Every VORREX watch is the result of hundreds of hours of meticulous work by master horologists, combining centuries-old techniques with cutting-edge materials.
+            </p>
+          </motion.div>
+          <div className="relative">
+            <div className="rounded-[60px] overflow-hidden premium-shadow border border-gray-100 aspect-square">
+              <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1000" alt="Craftsmanship" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            </div>
+            <div className="absolute -bottom-10 -right-10 bg-white p-10 rounded-[40px] shadow-2xl border border-gray-50 hidden md:block">
+              <p className="text-premium-gold font-serif font-bold text-5xl">30+</p>
+              <p className="text-bottle-green/40 text-[10px] font-bold uppercase tracking-[0.3em]">Years of Mastery</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 text-center">
+          {[
+            { icon: <ShieldCheck size={48} className="text-premium-gold mx-auto mb-8" />, title: "Lifetime Warranty", desc: "We stand behind our craftsmanship with a comprehensive lifetime guarantee." },
+            { icon: <Gem size={48} className="text-premium-gold mx-auto mb-8" />, title: "Ethical Sourcing", desc: "All our materials are ethically sourced and environmentally responsible." },
+            { icon: <Clock size={48} className="text-premium-gold mx-auto mb-8" />, title: "Swiss Movement", desc: "Powered by the world's most precise and reliable Swiss automatic movements." }
+          ].map((item, i) => (
+            <div key={i} className="p-10 md:p-12 bg-white rounded-[60px] premium-shadow border border-gray-50 group hover:-translate-y-2 transition-all duration-500">
+              <div className="mb-8 transition-transform group-hover:scale-110 duration-500">
+                {item.icon}
+              </div>
+              <h3 className="text-2xl font-bold text-bottle-green mb-6 uppercase tracking-tight">{item.title}</h3>
+              <p className="text-gray-500 leading-relaxed font-medium">{item.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
-
-        <div className="grid md:grid-cols-3 gap-12 text-center">
-        {[
-          { icon: <ShieldCheck size={40} className="text-premium-gold mx-auto mb-6" />, title: "Lifetime Warranty", desc: "We stand behind our craftsmanship with a comprehensive lifetime guarantee." },
-          { icon: <Gem size={40} className="text-premium-gold mx-auto mb-6" />, title: "Ethical Sourcing", desc: "All our materials are ethically sourced and environmentally responsible." },
-          { icon: <Clock size={40} className="text-premium-gold mx-auto mb-6" />, title: "Swiss Movement", desc: "Powered by the world's most precise and reliable Swiss automatic movements." }
-        ].map((item, i) => (
-          <div key={i} className="p-8 group">
-            <div className="mb-6 transition-transform group-hover:scale-110 duration-300">
-              {item.icon}
-            </div>
-            <h3 className="text-2xl font-bold text-bottle-green mb-4">{item.title}</h3>
-            <p className="text-gray-500 leading-relaxed">{item.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-</motion.div>
+    </section>
+  </motion.div>
 );
 
 const ContactPage = () => (
@@ -876,73 +921,73 @@ const ContactPage = () => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    className="pt-24"
+    className="pt-32 md:pt-48 pb-20 px-4 md:px-10"
   >
     <section>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
-          <span className="text-premium-gold font-medium tracking-[0.3em] uppercase text-sm mb-4 block">Get In Touch</span>
-          <h1 className="text-5xl md:text-7xl font-bold text-bottle-green">Contact Us</h1>
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-20 md:mb-32">
+          <span className="text-premium-gold font-bold tracking-[0.5em] uppercase text-[10px] mb-8 block">Concierge Service</span>
+          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold text-bottle-green tracking-tighter">Get In Touch</h1>
         </div>
 
-      <div className="grid md:grid-cols-2 gap-20">
-        <div className="space-y-12">
-          <div className="flex gap-6">
-            <div className="w-14 h-14 bg-bottle-green/5 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <MapPin className="text-premium-gold" />
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-start">
+          <div className="space-y-10 md:space-y-16">
+            <div className="flex gap-8 group">
+              <div className="w-20 h-20 bg-bottle-green/5 rounded-[32px] flex items-center justify-center flex-shrink-0 group-hover:bg-premium-gold/10 transition-colors duration-500">
+                <MapPin className="text-premium-gold" size={32} />
+              </div>
+              <div>
+                <h4 className="text-2xl font-bold text-bottle-green mb-3 uppercase tracking-tight">Our Boutique</h4>
+                <p className="text-gray-500 text-lg leading-relaxed font-medium">123 Luxury Avenue, Geneva <br /> Switzerland, 1201</p>
+              </div>
             </div>
-            <div>
-              <h4 className="text-xl font-bold text-bottle-green mb-2">Our Boutique</h4>
-              <p className="text-gray-500 leading-relaxed">123 Luxury Avenue, Geneva <br /> Switzerland, 1201</p>
+            <div className="flex gap-8 group">
+              <div className="w-20 h-20 bg-bottle-green/5 rounded-[32px] flex items-center justify-center flex-shrink-0 group-hover:bg-premium-gold/10 transition-colors duration-500">
+                <Phone className="text-premium-gold" size={32} />
+              </div>
+              <div>
+                <h4 className="text-2xl font-bold text-bottle-green mb-3 uppercase tracking-tight">Call Us</h4>
+                <p className="text-gray-500 text-lg leading-relaxed font-medium">+41 22 123 4567 <br /> Mon - Fri, 9am - 6pm</p>
+              </div>
+            </div>
+            <div className="flex gap-8 group">
+              <div className="w-20 h-20 bg-bottle-green/5 rounded-[32px] flex items-center justify-center flex-shrink-0 group-hover:bg-premium-gold/10 transition-colors duration-500">
+                <Mail className="text-premium-gold" size={32} />
+              </div>
+              <div>
+                <h4 className="text-2xl font-bold text-bottle-green mb-3 uppercase tracking-tight">Email Us</h4>
+                <p className="text-gray-500 text-lg leading-relaxed font-medium">concierge@vorrex.com <br /> support@vorrex.com</p>
+              </div>
             </div>
           </div>
-          <div className="flex gap-6">
-            <div className="w-14 h-14 bg-bottle-green/5 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <Phone className="text-premium-gold" />
-            </div>
-            <div>
-              <h4 className="text-xl font-bold text-bottle-green mb-2">Call Us</h4>
-              <p className="text-gray-500 leading-relaxed">+41 22 123 4567 <br /> Mon - Fri, 9am - 6pm</p>
-            </div>
-          </div>
-          <div className="flex gap-6">
-            <div className="w-14 h-14 bg-bottle-green/5 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <Mail className="text-premium-gold" />
-            </div>
-            <div>
-              <h4 className="text-xl font-bold text-bottle-green mb-2">Email Us</h4>
-              <p className="text-gray-500 leading-relaxed">concierge@sereno.com <br /> support@sereno.com</p>
-            </div>
-          </div>
-        </div>
 
-        <form className="bg-white p-10 rounded-[40px] premium-shadow space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-bottle-green">First Name</label>
-              <input type="text" className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-premium-gold/20" placeholder="John" />
+          <form className="bg-white p-8 md:p-16 rounded-[60px] premium-shadow space-y-8 border border-gray-50">
+            <div className="grid sm:grid-cols-2 gap-8">
+              <div className="space-y-3">
+                <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">First Name</label>
+                <input type="text" className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none focus:ring-4 ring-premium-gold/10 transition-all border border-transparent focus:border-premium-gold/20" placeholder="John" />
+              </div>
+              <div className="space-y-3">
+                <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">Last Name</label>
+                <input type="text" className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none focus:ring-4 ring-premium-gold/10 transition-all border border-transparent focus:border-premium-gold/20" placeholder="Doe" />
+              </div>
             </div>
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-bottle-green">Last Name</label>
-              <input type="text" className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-premium-gold/20" placeholder="Doe" />
+            <div className="space-y-3">
+              <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">Email Address</label>
+              <input type="email" className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none focus:ring-4 ring-premium-gold/10 transition-all border border-transparent focus:border-premium-gold/20" placeholder="john@example.com" />
             </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-bottle-green">Email Address</label>
-            <input type="email" className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-premium-gold/20" placeholder="john@example.com" />
-          </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-bottle-green">Message</label>
-            <textarea rows={4} className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-premium-gold/20 resize-none" placeholder="How can we help you?"></textarea>
-          </div>
-          <button className="w-full bg-bottle-green text-white py-4 rounded-full font-bold hover:bg-bottle-green-light transition-all premium-shadow">
-            Send Message
-          </button>
-        </form>
+            <div className="space-y-3">
+              <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">Message</label>
+              <textarea rows={5} className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none focus:ring-4 ring-premium-gold/10 transition-all border border-transparent focus:border-premium-gold/20 resize-none" placeholder="How can we help you?"></textarea>
+            </div>
+            <button className="w-full bg-bottle-green text-white py-6 rounded-full font-bold hover:bg-bottle-green-light transition-all premium-shadow uppercase tracking-[0.2em] text-xs">
+              Send Message
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-  </section>
-</motion.div>
+    </section>
+  </motion.div>
 );
 
 const ProductDetailPage = () => {
@@ -950,13 +995,13 @@ const ProductDetailPage = () => {
   const { addToCart } = useCart();
   const product = PRODUCTS.find(p => p.id === Number(id));
 
-  if (!product) return <div className="pt-40 text-center">Product not found</div>;
+  if (!product) return <div className="pt-48 text-center font-serif text-3xl text-bottle-green">Product not found</div>;
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-32 pb-24">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-32 md:pt-48 pb-24 px-4 md:px-10">
       <section>
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 lg:gap-32 items-center">
-        <div className="bg-white rounded-[40px] aspect-[4/5] flex items-center justify-center relative overflow-hidden premium-shadow group">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
+        <div className="bg-white rounded-[60px] aspect-[4/5] flex items-center justify-center relative overflow-hidden premium-shadow group border border-gray-50">
           <motion.img 
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -967,49 +1012,49 @@ const ProductDetailPage = () => {
             referrerPolicy="no-referrer"
           />
           {product.badge && (
-            <span className="absolute top-8 left-8 bg-white/90 backdrop-blur-md px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-bottle-green shadow-xl">
+            <span className="absolute top-10 left-10 bg-white/90 backdrop-blur-md px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest text-bottle-green shadow-2xl z-10 border border-gray-100">
               {product.badge}
             </span>
           )}
         </div>
-        <div className="space-y-10">
+        <div className="space-y-12 text-center lg:text-left">
           <div>
-            <span className="text-premium-gold font-bold tracking-[0.4em] uppercase text-xs mb-6 block">{product.category}</span>
-            <h1 className="text-6xl lg:text-8xl font-serif font-bold text-bottle-green mb-4 tracking-tighter leading-none">{product.name}</h1>
-            <p className="text-xl text-gray-400 uppercase tracking-[0.3em] font-medium">{product.model}</p>
+            <span className="text-premium-gold font-bold tracking-[0.5em] uppercase text-[10px] mb-8 block">{product.category}</span>
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-bold text-bottle-green mb-6 tracking-tighter leading-[0.85]">{product.name}</h1>
+            <p className="text-xl md:text-2xl text-gray-300 uppercase tracking-[0.4em] font-light">{product.model}</p>
           </div>
           
-          <div className="flex items-center gap-6">
-            <p className="text-5xl font-serif text-premium-gold">${product.price}</p>
-            <div className="h-10 w-px bg-gray-200"></div>
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8 md:gap-12">
+            <p className="text-6xl md:text-7xl font-serif font-bold text-premium-gold">${product.price}</p>
+            <div className="hidden sm:block h-16 w-px bg-gray-100"></div>
+            <div className="flex flex-col items-center lg:items-start gap-3">
               <div className="flex gap-1 text-premium-gold">
                 {[1, 2, 3, 4, 5].map(i => <Star key={i} size={16} fill="currentColor" />)}
               </div>
-              <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">(4.9/5.0)</span>
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">(4.9/5.0 Rating)</span>
             </div>
           </div>
 
-          <p className="text-gray-500 text-lg leading-relaxed max-w-xl">{product.description}</p>
+          <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium">{product.description}</p>
           
-          <div className="pt-8 space-y-6">
-            <div className="flex gap-4">
-              <button 
-                onClick={() => addToCart(product)}
-                className="flex-1 bg-bottle-green text-white py-6 rounded-full font-bold text-lg hover:bg-bottle-green-light transition-all premium-shadow flex items-center justify-center gap-3"
-              >
-                Add to Shopping Bag <ArrowRight size={20} />
-              </button>
-            </div>
+          <div className="pt-10 space-y-8">
+            <button 
+              onClick={() => addToCart(product)}
+              className="w-full bg-bottle-green text-white py-6 md:py-8 rounded-full font-bold text-sm uppercase tracking-[0.3em] hover:bg-bottle-green-light transition-all premium-shadow flex items-center justify-center gap-4 group"
+            >
+              Add to Shopping Bag <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+            </button>
             
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-6 bg-gray-50 rounded-3xl border border-gray-100">
-                <ShieldCheck className="text-premium-gold mb-3" size={24} />
-                <h4 className="font-bold text-bottle-green text-sm uppercase tracking-widest">2 Year Warranty</h4>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="p-8 bg-gray-50 rounded-[40px] border border-gray-100 flex flex-col items-center lg:items-start text-center lg:text-left group hover:bg-white transition-colors duration-500">
+                <ShieldCheck className="text-premium-gold mb-4 group-hover:scale-110 transition-transform" size={32} />
+                <h4 className="font-bold text-bottle-green text-xs uppercase tracking-[0.2em]">Lifetime Warranty</h4>
+                <p className="text-[10px] text-gray-400 mt-2 font-medium">Guaranteed Swiss quality</p>
               </div>
-              <div className="p-6 bg-gray-50 rounded-3xl border border-gray-100">
-                <Clock className="text-premium-gold mb-3" size={24} />
-                <h4 className="font-bold text-bottle-green text-sm uppercase tracking-widest">Free Shipping</h4>
+              <div className="p-8 bg-gray-50 rounded-[40px] border border-gray-100 flex flex-col items-center lg:items-start text-center lg:text-left group hover:bg-white transition-colors duration-500">
+                <Clock className="text-premium-gold mb-4 group-hover:scale-110 transition-transform" size={32} />
+                <h4 className="font-bold text-bottle-green text-xs uppercase tracking-[0.2em]">Priority Shipping</h4>
+                <p className="text-[10px] text-gray-400 mt-2 font-medium">Complimentary worldwide</p>
               </div>
             </div>
           </div>
@@ -1068,70 +1113,66 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 flex items-center justify-center">
-      <section className="w-full">
-        <div className="max-w-md mx-auto px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white p-10 rounded-[40px] premium-shadow"
-          >
-        <h2 className="text-3xl font-serif font-bold text-bottle-green mb-2 text-center">
-          {isRegister ? "Create Account" : "Welcome Back"}
-        </h2>
-        <p className="text-gray-500 text-center mb-10">
-          {isRegister ? "Join the VORREX luxury circle" : "Sign in to your premium account"}
-        </p>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen pt-32 md:pt-48 pb-20 px-4 md:px-10 flex items-center justify-center bg-gray-50"
+    >
+      <div className="w-full max-w-2xl bg-white p-8 md:p-20 rounded-[60px] premium-shadow border border-gray-100">
+        <div className="text-center mb-16">
+          <span className="text-premium-gold font-bold tracking-[0.5em] uppercase text-[10px] mb-8 block">Member Access</span>
+          <h2 className="text-5xl md:text-7xl font-serif font-bold text-bottle-green tracking-tighter mb-4">{isRegister ? "Create Account" : "Welcome Back"}</h2>
+          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.3em]">Join the VORREX Collectors Circle</p>
+        </div>
 
         {error && (
-          <div className="bg-red-50 text-red-500 p-4 rounded-2xl mb-6 flex items-center gap-3 text-sm">
-            <AlertCircle size={18} /> {error}
+          <div className="bg-red-50 text-red-500 p-6 rounded-3xl mb-10 flex items-center gap-4 text-sm font-medium border border-red-100">
+            <AlertCircle size={20} /> {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-bottle-green">Email</label>
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div className="space-y-3">
+            <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">Email Address</label>
             <input 
               type="email" 
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-premium-gold/20" 
+              className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none border border-transparent focus:border-premium-gold/20 focus:ring-4 ring-premium-gold/10 transition-all font-medium" 
               placeholder="email@example.com" 
             />
           </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-bottle-green">Password</label>
+          <div className="space-y-3">
+            <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">Password</label>
             <input 
               type="password" 
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-premium-gold/20" 
+              className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none border border-transparent focus:border-premium-gold/20 focus:ring-4 ring-premium-gold/10 transition-all font-medium" 
               placeholder="••••••••" 
             />
           </div>
           <button 
             disabled={loading}
-            className="w-full bg-bottle-green text-white py-4 rounded-full font-bold hover:bg-bottle-green-light transition-all premium-shadow disabled:opacity-50"
+            className="w-full bg-bottle-green text-white py-6 rounded-full font-bold uppercase tracking-[0.3em] text-xs premium-shadow hover:bg-bottle-green-light transition-all disabled:opacity-50"
           >
-            {loading ? "Processing..." : isRegister ? "Sign Up" : "Sign In"}
+            {loading ? "Processing..." : isRegister ? "Sign Up Now" : "Sign In Account"}
           </button>
         </form>
 
-        <div className="mt-8 text-center">
+        <div className="mt-12 text-center">
           <button 
             onClick={() => setIsRegister(!isRegister)}
-            className="text-sm text-gray-500 hover:text-bottle-green transition-colors"
+            className="text-premium-gold font-bold uppercase tracking-[0.2em] text-[10px] hover:text-bottle-green transition-colors"
           >
             {isRegister ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
           </button>
         </div>
-      </motion.div>
-    </div>
-  </section>
-</div>
+      </div>
+    </motion.div>
   );
 };
 
@@ -1159,84 +1200,134 @@ const CheckoutPage = () => {
 
   if (cart.length === 0 && step !== 3) {
     return (
-      <div className="pt-40 pb-20 text-center">
-        <h2 className="text-3xl font-serif text-bottle-green mb-6">Your cart is empty</h2>
-        <Link to="/shop" className="bg-bottle-green text-white px-10 py-4 rounded-full font-bold">Start Shopping</Link>
+      <div className="pt-48 pb-32 text-center px-4">
+        <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-10">
+          <ShoppingCart size={40} className="text-gray-200" />
+        </div>
+        <h2 className="text-4xl font-serif font-bold text-bottle-green mb-8 tracking-tighter">Your bag is empty</h2>
+        <Link to="/shop" className="bg-bottle-green text-white px-12 py-5 rounded-full font-bold uppercase tracking-widest text-xs premium-shadow inline-block">Start Shopping</Link>
       </div>
     );
   }
 
   return (
-    <div className="pt-24">
+    <div className="pt-32 md:pt-48 pb-24 px-4 md:px-10">
       <section>
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="flex justify-between items-center mb-16">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-wrap justify-center md:justify-between items-center gap-8 mb-20 md:mb-32">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${step >= i ? "bg-bottle-green text-white" : "bg-gray-100 text-gray-400"}`}>
-                {step > i ? <CheckCircle2 size={20} /> : i}
+            <div key={i} className="flex items-center gap-4">
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition-all duration-500 ${step >= i ? "bg-bottle-green text-white shadow-xl scale-110" : "bg-gray-100 text-gray-300"}`}>
+                {step > i ? <CheckCircle2 size={24} /> : i}
               </div>
-              <span className={`text-sm font-bold uppercase tracking-widest ${step >= i ? "text-bottle-green" : "text-gray-400"}`}>
+              <span className={`text-[10px] font-bold uppercase tracking-[0.3em] ${step >= i ? "text-bottle-green" : "text-gray-300"}`}>
                 {i === 1 ? "Shipping" : i === 2 ? "Payment" : "Success"}
               </span>
-              {i < 3 && <div className={`w-20 h-px ${step > i ? "bg-bottle-green" : "bg-gray-200"}`}></div>}
+              {i < 3 && <div className={`hidden md:block w-24 h-px ${step > i ? "bg-bottle-green" : "bg-gray-100"}`}></div>}
             </div>
           ))}
         </div>
 
         {step === 1 && (
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="md:col-span-2 space-y-8">
-              <div className="bg-white p-10 rounded-[40px] premium-shadow space-y-6">
-                <h3 className="text-2xl font-serif font-bold text-bottle-green mb-6">Shipping Details</h3>
-                <div className="grid grid-cols-2 gap-6">
-                  <input className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none" placeholder="First Name" />
-                  <input className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none" placeholder="Last Name" />
+          <div className="grid lg:grid-cols-3 gap-12 items-start">
+            <div className="lg:col-span-2 space-y-8">
+              <div className="bg-white p-8 md:p-16 rounded-[60px] premium-shadow space-y-8 border border-gray-50">
+                <h3 className="text-3xl font-serif font-bold text-bottle-green mb-10 tracking-tight">Shipping Details</h3>
+                <div className="grid sm:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">First Name</label>
+                    <input className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none border border-transparent focus:border-premium-gold/20 focus:ring-4 ring-premium-gold/10 transition-all" placeholder="John" />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">Last Name</label>
+                    <input className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none border border-transparent focus:border-premium-gold/20 focus:ring-4 ring-premium-gold/10 transition-all" placeholder="Doe" />
+                  </div>
                 </div>
-                <input className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none" placeholder="Address" />
-                <div className="grid grid-cols-2 gap-6">
-                  <input className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none" placeholder="City" />
-                  <input className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none" placeholder="Postal Code" />
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">Full Address</label>
+                  <input className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none border border-transparent focus:border-premium-gold/20 focus:ring-4 ring-premium-gold/10 transition-all" placeholder="123 Luxury St, Apt 4B" />
                 </div>
-                <button onClick={() => setStep(2)} className="w-full bg-bottle-green text-white py-4 rounded-full font-bold">Continue to Payment</button>
+                <div className="grid sm:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">City</label>
+                    <input className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none border border-transparent focus:border-premium-gold/20 focus:ring-4 ring-premium-gold/10 transition-all" placeholder="Geneva" />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">Postal Code</label>
+                    <input className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none border border-transparent focus:border-premium-gold/20 focus:ring-4 ring-premium-gold/10 transition-all" placeholder="1201" />
+                  </div>
+                </div>
+                <button onClick={() => setStep(2)} className="w-full bg-bottle-green text-white py-6 rounded-full font-bold uppercase tracking-[0.3em] text-xs premium-shadow hover:bg-bottle-green-light transition-all">Continue to Payment</button>
               </div>
             </div>
-            <div className="bg-gray-50 p-8 rounded-[40px] h-fit">
-              <h3 className="font-bold text-bottle-green mb-6 uppercase tracking-widest text-sm">Order Summary</h3>
-              <div className="space-y-4 mb-6">
+            <div className="bg-gray-50 p-10 rounded-[60px] border border-gray-100 sticky top-32">
+              <h3 className="font-bold text-bottle-green mb-10 uppercase tracking-[0.3em] text-[10px] text-center">Order Summary</h3>
+              <div className="space-y-6 mb-10">
                 {cart.map(item => (
-                  <div key={item.id} className="flex justify-between text-sm">
-                    <span className="text-gray-500">{item.name} x {item.quantity}</span>
-                    <span className="font-bold text-bottle-green">${item.price * item.quantity}</span>
+                  <div key={item.id} className="flex justify-between items-center gap-4">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 bg-white rounded-2xl p-2 border border-gray-100 flex-shrink-0">
+                        <img src={item.img} alt={item.name} className="w-full h-full object-cover rounded-xl" referrerPolicy="no-referrer" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-bottle-green leading-tight">{item.name}</p>
+                        <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">Qty: {item.quantity}</p>
+                      </div>
+                    </div>
+                    <span className="font-serif font-bold text-bottle-green">${item.price * item.quantity}</span>
                   </div>
                 ))}
               </div>
-              <div className="border-t border-gray-200 pt-6 flex justify-between items-center">
-                <span className="text-lg font-bold text-bottle-green">Total</span>
-                <span className="text-2xl font-serif font-bold text-premium-gold">${totalPrice}</span>
+              <div className="border-t border-gray-200 pt-8 space-y-4">
+                <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-gray-400">
+                  <span>Subtotal</span>
+                  <span>${totalPrice}</span>
+                </div>
+                <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-gray-400">
+                  <span>Shipping</span>
+                  <span className="text-green-500">Free</span>
+                </div>
+                <div className="flex justify-between items-center pt-4">
+                  <span className="text-xl font-bold text-bottle-green uppercase tracking-tight">Total</span>
+                  <span className="text-3xl font-serif font-bold text-premium-gold">${totalPrice}</span>
+                </div>
               </div>
             </div>
           </div>
         )}
 
         {step === 2 && (
-          <div className="max-w-md mx-auto bg-white p-10 rounded-[40px] premium-shadow text-center">
-            <Lock className="text-premium-gold mx-auto mb-6" size={48} />
-            <h3 className="text-2xl font-serif font-bold text-bottle-green mb-4">Secure Payment</h3>
-            <p className="text-gray-500 mb-8">Your payment is encrypted and processed securely.</p>
-            <div className="space-y-4 mb-8">
-              <input className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none" placeholder="Card Number" />
-              <div className="grid grid-cols-2 gap-4">
-                <input className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none" placeholder="MM/YY" />
-                <input className="w-full bg-gray-50 rounded-2xl px-6 py-4 outline-none" placeholder="CVC" />
+          <div className="max-w-2xl mx-auto bg-white p-8 md:p-16 rounded-[60px] premium-shadow border border-gray-50">
+            <div className="text-center mb-12">
+              <div className="w-20 h-20 bg-premium-gold/10 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+                <Lock className="text-premium-gold" size={32} />
+              </div>
+              <h3 className="text-3xl font-serif font-bold text-bottle-green mb-4 tracking-tight">Secure Payment</h3>
+              <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.3em]">Your transaction is fully encrypted</p>
+            </div>
+            
+            <div className="space-y-8 mb-12">
+              <div className="space-y-3">
+                <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">Card Number</label>
+                <input className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none border border-transparent focus:border-premium-gold/20 focus:ring-4 ring-premium-gold/10 transition-all" placeholder="0000 0000 0000 0000" />
+              </div>
+              <div className="grid sm:grid-cols-2 gap-8">
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">Expiry Date</label>
+                  <input className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none border border-transparent focus:border-premium-gold/20 focus:ring-4 ring-premium-gold/10 transition-all" placeholder="MM / YY" />
+                </div>
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-bottle-green ml-2">CVC / CVV</label>
+                  <input className="w-full bg-gray-50 rounded-3xl px-8 py-5 outline-none border border-transparent focus:border-premium-gold/20 focus:ring-4 ring-premium-gold/10 transition-all" placeholder="123" />
+                </div>
               </div>
             </div>
             <button 
               disabled={loading}
               onClick={handlePlaceOrder}
-              className="w-full bg-bottle-green text-white py-4 rounded-full font-bold premium-shadow disabled:opacity-50"
+              className="w-full bg-bottle-green text-white py-6 rounded-full font-bold uppercase tracking-[0.3em] text-xs premium-shadow hover:bg-bottle-green-light transition-all disabled:opacity-50 flex items-center justify-center gap-4"
             >
-              {loading ? "Processing..." : `Pay $${totalPrice}`}
+              {loading ? "Processing..." : `Complete Purchase — $${totalPrice}`}
             </button>
           </div>
         )}
@@ -1258,30 +1349,26 @@ const CheckoutPage = () => {
 };
 
 const Footer = () => (
-  <footer className="bg-white pt-24 pb-12 px-6 border-t border-gray-100">
+  <footer className="bg-white pt-32 pb-16 px-4 md:px-10 border-t border-gray-50">
     <div className="max-w-7xl mx-auto">
-      <div className="grid md:grid-cols-4 gap-12 mb-20">
-        <div className="col-span-2">
-          <h2 className="text-3xl font-serif font-bold text-bottle-green mb-6 uppercase tracking-tighter">VORREX</h2>
-          <p className="text-gray-500 max-w-sm mb-8 leading-relaxed">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-24 mb-32">
+        <div className="sm:col-span-2">
+          <h2 className="text-4xl font-serif font-bold text-bottle-green mb-10 uppercase tracking-tighter">VORREX</h2>
+          <p className="text-gray-500 max-w-sm mb-12 leading-relaxed font-medium text-lg">
             Crafting excellence since 1994. We believe that a watch is more than just a timepiece—it's a statement of character and a legacy of precision.
           </p>
-          <div className="flex gap-4">
-            <a href="#" className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-bottle-green hover:bg-bottle-green hover:text-white transition-all">
-              <Instagram size={18} />
-            </a>
-            <a href="#" className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-bottle-green hover:bg-bottle-green hover:text-white transition-all">
-              <Twitter size={18} />
-            </a>
-            <a href="#" className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-bottle-green hover:bg-bottle-green hover:text-white transition-all">
-              <Facebook size={18} />
-            </a>
+          <div className="flex gap-6">
+            {[Instagram, Twitter, Facebook].map((Icon, i) => (
+              <a key={i} href="#" className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-bottle-green hover:bg-premium-gold hover:text-white transition-all duration-500 shadow-sm">
+                <Icon size={20} />
+              </a>
+            ))}
           </div>
         </div>
         
         <div>
-          <h4 className="text-bottle-green font-bold uppercase tracking-widest text-sm mb-6">Quick Links</h4>
-          <ul className="space-y-4 text-gray-500 text-sm">
+          <h4 className="text-bottle-green font-bold uppercase tracking-[0.3em] text-[10px] mb-10">Quick Links</h4>
+          <ul className="space-y-6 text-gray-400 text-sm font-bold uppercase tracking-widest">
             <li><Link to="/about" className="hover:text-premium-gold transition-colors">About Us</Link></li>
             <li><Link to="/shop" className="hover:text-premium-gold transition-colors">Our Collections</Link></li>
             <li><a href="#" className="hover:text-premium-gold transition-colors">Store Locator</a></li>
@@ -1290,27 +1377,27 @@ const Footer = () => (
         </div>
         
         <div>
-          <h4 className="text-bottle-green font-bold uppercase tracking-widest text-sm mb-6">Newsletter</h4>
-          <p className="text-gray-500 text-sm mb-4">Subscribe to receive updates, access to exclusive deals, and more.</p>
-          <div className="flex gap-2">
+          <h4 className="text-bottle-green font-bold uppercase tracking-[0.3em] text-[10px] mb-10">Newsletter</h4>
+          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-8 leading-loose">Subscribe to receive updates, access to exclusive deals, and more.</p>
+          <div className="flex flex-col gap-4">
             <input 
               type="email" 
               placeholder="Your email" 
-              className="bg-gray-100 rounded-full px-6 py-2 text-sm outline-none focus:ring-2 ring-premium-gold/20 flex-1"
+              className="bg-gray-50 rounded-3xl px-8 py-5 text-sm outline-none focus:ring-4 ring-premium-gold/10 transition-all border border-transparent focus:border-premium-gold/20"
             />
-            <button className="bg-bottle-green text-white p-2 rounded-full hover:bg-bottle-green-light transition-all">
-              <ArrowRight size={20} />
+            <button className="bg-bottle-green text-white py-5 rounded-3xl hover:bg-bottle-green-light transition-all font-bold uppercase tracking-[0.3em] text-[10px] premium-shadow">
+              Subscribe Now
             </button>
           </div>
         </div>
       </div>
       
-      <div className="pt-12 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-400 uppercase tracking-widest font-medium">
+      <div className="pt-16 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-10 text-[9px] text-gray-400 uppercase tracking-[0.3em] font-bold text-center md:text-left">
         <p>© 2024 VORREX LUXURY WATCHES. ALL RIGHTS RESERVED.</p>
-        <div className="flex gap-8">
-          <a href="#" className="hover:text-bottle-green">Privacy Policy</a>
-          <a href="#" className="hover:text-bottle-green">Terms of Service</a>
-          <a href="#" className="hover:text-bottle-green">Cookie Policy</a>
+        <div className="flex flex-wrap justify-center gap-10">
+          <a href="#" className="hover:text-bottle-green transition-colors">Privacy Policy</a>
+          <a href="#" className="hover:text-bottle-green transition-colors">Terms of Service</a>
+          <a href="#" className="hover:text-bottle-green transition-colors">Cookie Policy</a>
         </div>
       </div>
     </div>
